@@ -2474,6 +2474,21 @@
           ]
         }
       }
+    },
+    {
+      "dataType": "javascript",
+      "bodyData": {
+        "document": {
+          "savedAt": "11/24/2025, 11:40:46 PM",
+          "sources": [
+            {
+              "fileExtension": "js",
+              "filename": "sketch.js",
+              "content": "// 最終課題を制作しよう\r\n// アメリカの星条旗（建国当初）を描画する\r\n\r\n// ⭐ 追加:星の回転角度を保持するグローバル変数 (初期値0)\r\nlet rotationAngle = 0;\r\n// ⭐ 追加: マウスが押されているかを示す変数\r\nlet isMousePressed = false;\r\n\r\nfunction star(cx, cy, r){\r\n      beginShape();    // 点つなぎを始める\r\n      for(let i = 0; i < 5; i++){\r\n        const theta = TWO_PI * i * 2 / 5 - HALF_PI;\r\n        const x = cx + cos(theta) * r;\r\n        const y = cy + sin(theta) * r;\r\n        vertex(x, y);  // 次につなぐ点を１つ増やす\r\n      }\r\n      endShape(CLOSE); // 点つなぎを終わる\r\n    }\r\n\r\nfunction draw() {\r\n  createCanvas(570, 300);\r\n  noStroke();\r\n  background(255);\r\n\r\n  const d = height / 13; // 縞1本の太さ\r\n  const blue = color(0, 40, 104);\r\n  const red = color(191, 10, 48)\r\n\r\n  // 縞を描く\r\n  for(let i = 0; i < 13; i++){\r\n    // 先に色を指定\r\n    if(i % 2 == 0){\r\n      fill(red);\r\n    }else{\r\n      fill(255);\r\n    }\r\n    rect(0, i * d, width, d);\r\n  }\r\n\r\n  //青いベースを描く\r\n  const size = d * 7;\r\n  fill(blue);\r\n  rect(0, 0, size, size);\r\n\r\n  // 星を描く\r\n  fill(255) // 星の塗りつぶし色を指定\r\n\r\n  // ⭐ マウスが押されている間、回転角度を少しずつ増やす\r\n    if (isMousePressed) {\r\n      // 0.05ラジアンずつ回転させる (値は任意で調整可能)\r\n      rotationAngle += 0.05; \r\n    }\r\n\r\n  for(let i = 0; i < 13; i++){\r\n    // ⭐ 角度計算に rotationAngle を加算！\r\n    const theta = TWO_PI * i / 13 + rotationAngle;   // TWO_PI は円周率の2倍\r\n    const x = size / 2 + cos(theta) * 50; // 関数 cos の戻り値を使用\r\n    const y = size / 2 + sin(theta) * 50; // 関数 sin の戻り値を使用   \r\n  // 星マークを描く関数を呼び出す\r\n  star(x, y, 10); // 星マークを描く関数を呼び出す\r\n  }\r\n}\r\n// ⭐ 追加: マウスが押されたときに実行される関数\r\nfunction mousePressed() {\r\n  isMousePressed = true;\r\n}\r\n\r\n// ⭐ 追加: マウスが離されたときに実行される関数\r\nfunction mouseReleased() {\r\n  isMousePressed = false;\r\n}"
+            }
+          ]
+        }
+      }
     }
   ]
 }
