@@ -1,6 +1,7 @@
 // 心臓の鼓動のようなアニメーション
 const cycle = 100; // 1周期のフレーム数
-let count; // 何フレーム目か
+let count = 0; // 何フレーム目か
+let size = 50;
 
 function setup(){
   createCanvas(200, 200);
@@ -8,13 +9,16 @@ function setup(){
 }
 
 function draw(){
-  background(160, 192, 255);
-  
-  let speed = 1; // アニメーションの速さ
-  // BLANK[2]
-  count = (count + speed) % cycle;
-
-  let size = 50;
-  // BLANK[1] 1周期の前半は size が大きくなり、後半は小さくなる
+  background(160, 192, 255); // 前回の描画を上塗りして消す
+  count = (count + 1) % cycle; // cycleが100のため、count（現在のフレーム数）は0から99までを繰り返し循環
+  if(keyIsPressed){
+    count = (count + 2 ) % cycle;
+  }
+  // 周期を2で割り前半・後半に分け、前半で円が大きく、後半で円が小さくなるようにする
+  if(count < cycle / 2){
+    size += 1;
+  }else{
+    size -= 1;
+  }
   ellipse(width / 2, height / 2, size);
 }
